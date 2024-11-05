@@ -52,3 +52,15 @@ CREATE INDEX idx_task_users_id ON task(users_id);
 CREATE INDEX idx_task_projet_id ON task(projet_id);
 CREATE INDEX idx_user_project_users_id ON user_project(users_id);
 CREATE INDEX idx_user_project_projet_id ON user_project(projet_id);
+
+CREATE MATERIALIZED VIEW task_count_per_project AS
+SELECT
+    p.projet_id AS projet_id,
+    p.name AS projet_name,
+    COUNT(t.task_id) AS task_count
+FROM
+    projet p
+LEFT JOIN
+    task t ON t.projet_id = p.projet_id
+GROUP BY
+    p.projet_id, p.name;

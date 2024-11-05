@@ -3,7 +3,6 @@ package com.exo1.exo1.controller;
 import com.exo1.exo1.dto.TaskDto;
 import com.exo1.exo1.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

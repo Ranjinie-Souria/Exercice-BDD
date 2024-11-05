@@ -7,6 +7,7 @@ import com.exo1.exo1.repository.ProjetRepository;
 import com.exo1.exo1.repository.TaskRepository;
 import com.exo1.exo1.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -22,12 +23,12 @@ public class UserService {
     private ProjetRepository projetRepository;
     private UserMapper userMapper;
     
-    public List<UserDto> findAll() {
-        return userMapper.toDtos(userRepository.findAll());
+    public List<UserDto> findAll(Pageable pageable) {
+        return userMapper.toDtos(userRepository.findAllUsers(pageable).getContent());
     }
 
     public UserDto findById(long id) {
-        return userMapper.toDto(userRepository.findByIdWithTask(id).orElse(null));
+        return userMapper.toDto(userRepository.findUserById(id).orElse(null));
     }
 
     public UserDto save(UserDto userDto) {

@@ -17,10 +17,10 @@ public interface ProjetRepository extends JpaRepository<Projet, Long> {
             "LEFT JOIN FETCH p.tasks t")
     List<Projet> findAll();
 
-    @Query("SELECT p FROM Projet t " +
-            "LEFT JOIN FETCH p.user u " +
+    @Query("SELECT p FROM Projet p " +
+            "LEFT JOIN FETCH p.users u " +
             "LEFT JOIN FETCH p.tasks t " +
-            "WHERE t.id = :id"
+            "WHERE p.id = :id"
     )
     Optional<Projet> findById(@Param("id") Long id);
 }
